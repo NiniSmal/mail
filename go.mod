@@ -1,4 +1,4 @@
-module read-massage
+module gitlab.com/nina8884807/mail
 
 go 1.21
 

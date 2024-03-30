@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package ="read-massage/proto/gen";
+option go_package ="gitlab.com/nina8884807/mail/proto/gen";
 
 service Mail {
   rpc SendEmail(SendEmailRequest)returns(SendEmailResponse){

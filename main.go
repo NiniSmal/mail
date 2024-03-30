@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"gitlab.com/nina8884807/mail/internal/api"
+	gen "gitlab.com/nina8884807/mail/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	"read-massage/internal/api"
-	gen "read-massage/proto"
 )
 
 func main() {

@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
-	gen "read-massage/proto"
+	gen "gitlab.com/nina8884807/mail/proto"
 )
 
 type Handler struct {
