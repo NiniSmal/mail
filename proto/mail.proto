@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package ="read-massage/proto/gen";
+
+service Mail {
+  rpc SendEmail(SendEmailRequest)returns(SendEmailResponse){
+
+  }
+}
+
+message  SendEmailRequest{
+  string text = 1;
+  string to = 2;
+}
+
+message SendEmailResponse{
+
+}
+
