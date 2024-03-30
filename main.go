@@ -15,7 +15,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	grpcServer := grpc.NewServer()
-	gen.RegisterMailServer(grpcServer, api.Handler{})
+	gen.RegisterMailServer(grpcServer, &api.Handler{})
 	err = grpcServer.Serve(lis)
 	if err != nil {
 		log.Fatal(err)
