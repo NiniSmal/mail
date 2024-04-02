@@ -35,7 +35,7 @@ func NewMailClient(cc grpc.ClientConnInterface) MailClient {
 
 func (c *mailClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*SendEmailResponse, error) {
 	out := new(SendEmailResponse)
-	err := c.cc.Invoke(ctx, "/mail/SendEmail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/Mail/SendEmail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _Mail_SendEmail_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/mail/SendEmail",
+		FullMethod: "/Mail/SendEmail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MailServer).SendEmail(ctx, req.(*SendEmailRequest))
@@ -92,7 +92,7 @@ func _Mail_SendEmail_Handler(srv interface{}, ctx context.Context, dec func(inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Mail_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "mail",
+	ServiceName: "Mail",
 	HandlerType: (*MailServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
