@@ -1,11 +1,21 @@
 package new_service
 
 import (
+	"gitlab.com/nina8884807/mail/entutySend"
 	gen "gitlab.com/nina8884807/mail/proto"
 	"gopkg.in/gomail.v2"
 )
 
-func SendMessage(msg *gen.SendEmailRequest) error {
+type SendService struct{}
+
+func (s *SendService) SendMessage(msg *gen.SendEmailRequest) error {
+	if msg.To == "" {
+		return entutySend.ErrNotValidationEmail
+	}
+
+	if msg.Text == "" {
+		return entutySend.ErrNotValidationText
+	}
 
 	m := gomail.NewMessage()
 	m.SetHeader("From", "ninamusatova90@gmail.com")

@@ -11,13 +11,14 @@ import (
 
 type Handler struct {
 	*gen.UnimplementedMailServer
+	service new_service.SendService
 }
 
 func (h *Handler) SendEmail(ctx context.Context, request *gen.SendEmailRequest) (*gen.SendEmailResponse, error) {
 	if request == nil {
 		return nil, errors.New("request is empty")
 	}
-	err := new_service.SendMessage(request)
+	err := h.service.SendMessage(request)
 	if err != nil {
 		log.Println(err)
 	}
