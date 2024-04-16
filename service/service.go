@@ -1,4 +1,4 @@
-package new_service
+package service
 
 import (
 	"gitlab.com/nina8884807/mail/entutySend"
@@ -7,6 +7,10 @@ import (
 )
 
 type SendService struct{}
+
+func NewSendService() *SendService {
+	return &SendService{}
+}
 
 func (s *SendService) SendMessage(msg *gen.SendEmailRequest) error {
 	if msg.To == "" {
