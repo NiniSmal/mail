@@ -13,7 +13,7 @@ import (
 
 func main() {
 	r := kafka.NewReader(kafka.ReaderConfig{
-		Brokers:   []string{"localhost:9092"},
+		Brokers:   []string{"tmanager-kafka:9092"},
 		Topic:     "topic-A",
 		Partition: 0,
 		MaxBytes:  10e6, // 10MB
@@ -25,7 +25,9 @@ func main() {
 
 	go kafkaHandler.OnCreateUser()
 
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", 8080))
+	log.Println("start grpc-server at: 8090")
+
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", 8090))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
