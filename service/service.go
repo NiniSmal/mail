@@ -6,10 +6,13 @@ import (
 	"gopkg.in/gomail.v2"
 )
 
-type SendService struct{}
+type SendService struct {
+	mailLogin    string
+	mailPassword string
+}
 
-func NewSendService() *SendService {
-	return &SendService{}
+func NewSendService(mailLogin string, mailPassword string) *SendService {
+	return &SendService{mailLogin: mailLogin, mailPassword: mailPassword}
 }
 
 func (s *SendService) SendMessage(msg *gen.SendEmailRequest) error {
@@ -22,13 +25,13 @@ func (s *SendService) SendMessage(msg *gen.SendEmailRequest) error {
 	}
 
 	m := gomail.NewMessage()
-	m.SetHeader("From", "ninamusatova90@gmail.com")
+	m.SetHeader("From", s.mailLogin)
 	m.SetHeader("To", msg.To)
 	m.SetHeader("Subject", "Account verification")
 
 	m.SetBody("text/plain", msg.Text)
 
-	d := gomail.NewDialer("smtp.gmail.com", 465, "ninamusatova90@gmail.com", "nxbnwzblxgbdsryg")
+	d := gomail.NewDialer("smtp.gmail.com", 465, s.mailLogin, s.mailPassword)
 
 	if err := d.DialAndSend(m); err != nil {
 		return err
