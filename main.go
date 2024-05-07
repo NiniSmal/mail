@@ -8,21 +8,25 @@ import (
 	gen "gitlab.com/nina8884807/mail/proto"
 	"gitlab.com/nina8884807/mail/service"
 	"google.golang.org/grpc"
-	"log"
+	"log/slog"
 	"net"
+	"os"
 )
 
 func main() {
+	l := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+
 	cfg, err := config.GetConfig()
 	if err != nil {
-		log.Fatal(err)
+		l.Error("get config:", "error", err)
+		return
 	}
 
 	err = cfg.Validation()
 	if err != nil {
-		log.Fatal(err)
+		l.Error("validation:", "error", err)
+		return
 	}
-	log.Printf("%+v", cfg)
 
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   []string{cfg.KafkaAddr},
@@ -37,11 +41,12 @@ func main() {
 
 	go kafkaHandler.OnCreateUser()
 
-	log.Println("start grpc-server at: 8090")
+	l.Info(fmt.Sprintf("start grpc-server at: %d", cfg.Port))
 
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", cfg.Port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		l.Error("failed to listen", "error", err)
+		return
 	}
 	grpcServer := grpc.NewServer()
 
@@ -49,7 +54,7 @@ func main() {
 	gen.RegisterMailServer(grpcServer, h)
 	err = grpcServer.Serve(lis)
 	if err != nil {
-		log.Fatal(err)
+		l.Error("error", err)
 	}
 
 }
