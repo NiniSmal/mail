@@ -27,7 +27,7 @@ func (s *SendService) SendMessage(msg *gen.SendEmailRequest) error {
 	m := gomail.NewMessage()
 	m.SetHeader("From", s.mailLogin)
 	m.SetHeader("To", msg.To)
-	m.SetHeader("Subject", "Account verification")
+	m.SetHeader("Subject", msg.Subject)
 
 	m.SetBody("text/plain", msg.Text)
 

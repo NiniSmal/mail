@@ -31,13 +31,14 @@ func main() {
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   []string{cfg.KafkaAddr},
 		Topic:     cfg.KafkaTopicCreateUser,
+		GroupID:   "tm",
 		Partition: 0,
 		MaxBytes:  10e6, // 10MB
 	})
 
 	defer r.Close()
 	sendService := service.NewSendService(cfg.MailLogin, cfg.MailPassword)
-	kafkaHandler := api.NewKafkaHandler(r, sendService)
+	kafkaHandler := api.NewKafkaHandler(r, sendService, l)
 
 	go kafkaHandler.OnCreateUser()
 
