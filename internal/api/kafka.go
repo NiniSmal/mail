@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/segmentio/kafka-go"
+	"gitlab.com/nina8884807/mail/internal/service"
 	gen "gitlab.com/nina8884807/mail/proto"
-	"gitlab.com/nina8884807/mail/service"
 	"log/slog"
 )
 

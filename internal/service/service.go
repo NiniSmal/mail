@@ -1,7 +1,7 @@
 package service
 
 import (
-	"gitlab.com/nina8884807/mail/entutySend"
+	"gitlab.com/nina8884807/mail/internal/entity"
 	gen "gitlab.com/nina8884807/mail/proto"
 	"gopkg.in/gomail.v2"
 )
@@ -17,7 +17,7 @@ func NewSendService(mailLogin string, mailPassword string) *SendService {
 
 func (s *SendService) SendMessage(msg *gen.SendEmailRequest) error {
 	if msg.To == "" {
-		return entutySend.ErrNotValidationEmail
+		return entutySend.entutySend.ErrNotValidationEmail
 	}
 
 	if msg.Text == "" {

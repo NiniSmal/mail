@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/segmentio/kafka-go"
-	"gitlab.com/nina8884807/mail/config"
 	"gitlab.com/nina8884807/mail/internal/api"
+	"gitlab.com/nina8884807/mail/internal/config"
+	"gitlab.com/nina8884807/mail/internal/service"
 	gen "gitlab.com/nina8884807/mail/proto"
-	"gitlab.com/nina8884807/mail/service"
 	"google.golang.org/grpc"
 	"log/slog"
 	"net"

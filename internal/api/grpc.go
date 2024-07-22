@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"gitlab.com/nina8884807/mail/internal/service"
 	gen "gitlab.com/nina8884807/mail/proto"
-	"gitlab.com/nina8884807/mail/service"
 	"log"
 )
 
